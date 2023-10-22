@@ -1,79 +1,78 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class homepage extends StatefulWidget {
+  const homepage({super.key});
 
+  @override
+  State<homepage> createState() => _homepageState();
+}
+
+class _homepageState extends State<homepage> {
+  int currentPageIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("lib/images/homeBG.jpg"),
-          fit: BoxFit.cover,
+      bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'search',
+              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.favorite,
+              ), //add your own icons here
+              label: 'Saved',
+              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.near_me),
+              label: 'Near Me',
+              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.place),
+              label: 'Map',
+              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+            ),
+          ],
+          currentIndex: currentPageIndex,
+          selectedItemColor: Color.fromARGB(150, 255, 255, 255),
+          onTap: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          }),
+      body: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/images/homeBG.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
-      ),
-      child: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                ElevatedButton(
-                    onPressed: () {
-                      print('1');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: Color.fromARGB(210, 255, 255, 255),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      elevation: 0,
-                    ),
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        "near me",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )),
-                ElevatedButton(
-                    onPressed: () {
-                      print('2');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: Color.fromARGB(210, 255, 255, 255),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      elevation: 0,
-                    ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "search",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )),
-                ElevatedButton(
-                    onPressed: () {
-                      print('3');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: Color.fromARGB(210, 255, 255, 255),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      elevation: 0,
-                    ),
-                    child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "recents",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    )),
-              ])),
-    ));
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/images/saved.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/images/NearMe.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Container(
+          child: Center(child: Text('map here')),
+        ),
+      ][currentPageIndex],
+    );
   }
 }
