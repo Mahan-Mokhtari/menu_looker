@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.black,
+                      foregroundColor: Color.fromARGB(210, 255, 255, 255),
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       elevation: 0,
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.black,
+                      foregroundColor: Color.fromARGB(210, 255, 255, 255),
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       elevation: 0,
@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.black,
+                      foregroundColor: Color.fromARGB(210, 255, 255, 255),
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       elevation: 0,
