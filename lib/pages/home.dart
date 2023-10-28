@@ -4,7 +4,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class homepage extends StatefulWidget {
-  const homepage({super.key});
+  const homepage({Key? key}) : super(key: key);
 
   @override
   State<homepage> createState() => _homepageState();
@@ -71,14 +71,13 @@ class _homepageState extends State<homepage> {
     });
   }
 
-  sendText(Position message, Position message2) {
-    print(message);
+  sendText(String lon, String lat) {
+    print('sending ' + lon + lat);
     WebSocketChannel channel;
     try {
       channel = WebSocketChannel.connect(Uri.parse('ws://localhost:3000'));
-      channel.sink.add(message);
+      channel.sink.add(lon + ' ' + lat);
       channel.stream.listen((messgae) {
-        print(message);
         channel.sink.close();
       });
     } catch (error) {
@@ -149,10 +148,11 @@ class _homepageState extends State<homepage> {
         Container(
           child: Center(
               child: ElevatedButton(
-            child: Text('click m'),
-            onPressed: () {
-              sendText(_currentPosition?.longitude as Position,
-                  _currentPosition?.latitude as Position);
+            child: Text('click me'),
+            onPressed: () async {
+              await _getCurrentPosition();
+              sendText('${_currentPosition?.longitude ?? "fail"}',
+                  '${_currentPosition?.latitude ?? "fail"}');
             },
           )),
         ),
