@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -9,6 +10,22 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   int currentPageIndex = 0;
+
+  sendText(String message) {
+    print(message);
+    WebSocketChannel channel;
+    try {
+      channel = WebSocketChannel.connect(Uri.parse('ws://localhost:3000'));
+      channel.sink.add(message);
+      channel.stream.listen((messgae) {
+        print(message);
+        channel.sink.close();
+      });
+    } catch (error) {
+      print(error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +87,13 @@ class _homepageState extends State<homepage> {
           ),
         ),
         Container(
-          child: Center(child: Text('map here')),
+          child: Center(
+              child: ElevatedButton(
+            child: Text('click m'),
+            onPressed: () {
+              sendText('hello');
+            },
+          )),
         ),
       ][currentPageIndex],
     );
